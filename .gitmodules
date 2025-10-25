@@ -1,0 +1,3 @@
+[submodule "xost"]
+	path = xost
+	url = https://github.com/ro0sterduck/xost
