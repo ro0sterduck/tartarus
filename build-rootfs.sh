@@ -12,18 +12,12 @@ OSTREPO=$(realpath ./rootfs/ostree/repo)
 
 echo repository=$REPO > $TARGET/etc/xbps.d/00-repository.conf
 sudo xbps-install -Syu --rootdir "$TARGET"
-sudo xbps-install -y --rootdir "$TARGET" xbps linux linux-headers dinit ostree
+sudo xbps-install -y --rootdir "$TARGET" base-system bash xbps ostree fastfetch linux linux-headers
 
-git clone https://github.com/mirror/busybox.git --depth 1
-cd busybox
-make defconfig
-sed -i 's/# CONFIG_STATIC is not set/CONFIG_STATIC=y/' .config
-sed -i 's/CONFIG_TC=y/CONFIG_TC=n/' .config
-make -j$(nproc)
-make install CONFIG_PREFIX="$TARGET"
+cd $TARGET
 
-echo "# placeholder" > "$TARGET"/etc/fstab
-echo "Rootfs built at $TARGET"
+sudo echo "# placeholder" > "$TARGET"/etc/fstab
+sudo echo "Rootfs built at $TARGET"
 
 sudo ostree --repo="$OSTREPO" init
 sudo ostree --repo="$OSTREPO" commit --branch="$BRANCH" "$TARGET" --subject="Tartarus base commit."
