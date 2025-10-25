@@ -18,4 +18,4 @@ echo "Rootfs built at $TARGET"
 
 sudo ostree --repo="$OSTREPO" init
 sudo ostree --repo="$OSTREPO" commit --branch="$BRANCH" "$TARGET" --subject="Tartarus base commit."
-echo "Committed $ROOTFS to $OSTREPO branch $BRANCH"
+echo "Committed $TARGET to $OSTREPO branch $BRANCH"
