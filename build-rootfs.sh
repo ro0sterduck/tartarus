@@ -3,7 +3,6 @@ set -euo pipefail
 
 TARGET=$(realpath ./rootfs)
 REPO="${REPO:-https://mirror.meowsmp.net/voidlinux/current}"
-ROOTFS=$(realpath ./rootfs)
 BRANCH=tartarus/base
 
 mkdir -p $TARGET/{bin,sbin,usr/{bin,sbin},etc/xbps.d}
@@ -18,5 +17,5 @@ echo "# placeholder" > "$TARGET"/etc/fstab
 echo "Rootfs built at $TARGET"
 
 sudo ostree --repo="$OSTREPO" init
-sudo ostree --repo="$OSTREPO" commit --branch="$BRANCH" "$ROOTFS" --subject="Tartarus base commit."
+sudo ostree --repo="$OSTREPO" commit --branch="$BRANCH" "$TARGET" --subject="Tartarus base commit."
 echo "Committed $ROOTFS to $OSTREPO branch $BRANCH"
