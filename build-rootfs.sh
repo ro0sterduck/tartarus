@@ -12,7 +12,7 @@ OSTREPO=$(realpath ./rootfs/ostree/repo)
 
 echo repository=$REPO > $TARGET/etc/xbps.d/00-repository.conf
 sudo xbps-install -Syu --rootdir "$TARGET"
-sudo xbps-install -y --rootdir "$TARGET" coreutils xbps linux linux-headers dinit ostree
+sudo xbps-install -y --rootdir "$TARGET" busybox xbps linux linux-headers dinit ostree
 echo "# placeholder" > "$TARGET"/etc/fstab
 echo "Rootfs built at $TARGET"
 
