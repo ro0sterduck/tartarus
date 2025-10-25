@@ -1,5 +1,5 @@
 # tartarus
-a minimal linux distro built with dinit, ostree, xbps, and busybox.
+a minimal linux distro built with dinit, ostree, and xbps.
 
 literally nothing worth looking at here
 
