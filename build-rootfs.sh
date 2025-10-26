@@ -12,7 +12,7 @@ OSTREPO=$(realpath ./rootfs/ostree/repo)
 
 echo repository=$REPO > $TARGET/etc/xbps.d/00-repository.conf
 sudo xbps-install -Syu --rootdir "$TARGET"
-sudo xbps-install -y --rootdir "$TARGET" grub base-files coreutils findutils diffutils dash grep gzip sed gawk util-linux which tar shadow procps-ng iana-etc xbps nvi tzdata dinit
+sudo xbps-install -y --rootdir "$TARGET" grub base-files coreutils findutils diffutils dash grep gzip sed gawk linux linux-headers util-linux which tar shadow procps-ng iana-etc xbps nvi tzdata dinit
 
 cd $TARGET
 
@@ -44,6 +44,8 @@ sudo find . -print0 | sudo cpio --null -ov --format=newc | gzip -9 | sudo tee ..
 mkdir -p ../iso/{boot,efi,boot/grub}
 
 cp $TARGET/boot/vmlinuz-* $TARGET/../iso/boot/vmlinuz
+
+cd $TARGET/..
 
 sudo cp initramfs.cpio.gz $TARGET/../iso/boot/initrd.img
 
