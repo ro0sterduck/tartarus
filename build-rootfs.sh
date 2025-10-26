@@ -16,9 +16,15 @@ sudo xbps-install -y --rootdir "$TARGET" base-system bash xbps ostree fastfetch 
 
 cd $TARGET
 
-sudo echo "# placeholder" > "$TARGET"/etc/fstab
-sudo echo "Rootfs built at $TARGET"
+exec ../ostree-init.sh &
 
-sudo ostree --repo="$OSTREPO" init
-sudo ostree --repo="$OSTREPO" commit --branch="$BRANCH" "$TARGET" --subject="Tartarus base commit."
-echo "Committed $TARGET to $OSTREPO branch $BRANCH"
+echo 'NAME=Tartarus
+VERSION=1.0
+ID=tartarus
+PRETTY_NAME="Tartarus 1.0"
+VERSION_ID=1.0' | sudo tee "$TARGET/usr/lib/os-release" > /dev/null
+
+echo '# placeholder' | sudo tee "$TARGET/etc/fstab" > /dev/null
+echo "Rootfs built at $TARGET"
+
+echo "Ostree script running..."
